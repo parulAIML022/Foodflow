@@ -9,7 +9,8 @@ def register_user(
     db: Session,
     name: str,
     email: str,
-    password: str
+    password: str,
+    role: str
 ):
     existing_user = get_user_by_email(db, email)
 
@@ -22,7 +23,8 @@ def register_user(
         db=db,
         name=name,
         email=email,
-        password_hash=password_hash
+        password_hash=password_hash,
+        role=role
     )
 
     return user

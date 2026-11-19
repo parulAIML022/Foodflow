@@ -15,12 +15,14 @@ def create_user(
     db: Session,
     name: str,
     email: str,
-    password_hash: str
+    password_hash: str,
+    role: str
 ):
     user = User(
         name=name,
         email=email,
-        password_hash=password_hash
+        password_hash=password_hash,
+        role=role
     )
 
     db.add(user)

@@ -1,6 +1,7 @@
 from sqlalchemy import (
     Column, Integer, String, DateTime, ForeignKey, Numeric
 )
+from sqlalchemy.orm import relationship 
 from sqlalchemy.sql import func
 from app.database.database import Base
 
@@ -37,7 +38,11 @@ class Order(Base):
         DateTime,
         server_default=func.now()
     )
-
+    items = relationship(
+        "OrderItem",
+        back_populates="order",
+        cascade="all, delete-orphan"
+    )
 
 class OrderItem(Base):
     __tablename__ = "order_items"
@@ -69,3 +74,4 @@ class OrderItem(Base):
         Numeric(10, 2),
         nullable=False
     )
+    order = relationship("Order",back_populates="items")
